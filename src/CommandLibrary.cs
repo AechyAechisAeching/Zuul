@@ -15,7 +15,6 @@ class CommandLibrary
 		validCommands.Add("quit");
 		validCommands.Add("look");
 		validCommands.Add("World Domination");
-		validCommands.Add("Billie Eilish");
 	}
 
 	// Check whether a given string is a valid command word.
