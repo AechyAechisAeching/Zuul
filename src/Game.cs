@@ -17,33 +17,47 @@ class Game
 	private void CreateRooms()
 	{
 		// Create the rooms
-		Room outside = new Room("outside the main entrance of the university");
-		Room theatre = new Room("in a lecture theatre");
-		Room pub = new Room("in the campus pub");
-		Room lab = new Room("in a computing lab");
-		Room office = new Room("in the computing admin office");
+		Room bedroom = new Room("You are now in your bedroom.");
+		Room hallway = new Room("You are now in the hallway.");
+		Room bathroom = new Room("You entered the bathroom.");
+		Room kitchen = new Room("You are now in the kitchen, something smells good.");
+		Room staircase = new Room("You are walking down the stairs.");
+		Room office = new Room("You entered your office.");
+		Room secondHallway = new Room("You are back in a hallway.");
+		Room livingroom = new Room("You entered the livingroom.");
 
 		// Initialise room exits
-		outside.AddExit("east", theatre);
-		outside.AddExit("south", lab);
-		outside.AddExit("west", pub);
 
-		theatre.AddExit("west", outside);
+		bedroom.AddExit("north", hallway);
+		hallway.AddExit("south", bedroom);
 
-		pub.AddExit("east", outside);
+		hallway.AddExit("east", bathroom);
+		bathroom.AddExit("west", hallway);
 
-		lab.AddExit("north", outside);
-		lab.AddExit("east", office);
+		hallway.AddExit("north", staircase);
+		staircase.AddExit("south", hallway);
 
-		office.AddExit("west", lab);
+		// Downstairs
+
+		staircase.AddExit("north", secondHallway);
+		secondHallway.AddExit("south", staircase);
+
+		secondHallway.AddExit("east", kitchen);
+		kitchen.AddExit("west", secondHallway);
+
+		secondHallway.AddExit("north", office);
+		office.AddExit("south", secondHallway);
+
+		secondHallway.AddExit("west", livingroom);
+		livingroom.AddExit("east", secondHallway);
 
 		// Create your Items here
 		// ...
 		// And add them to the Rooms
 		// ...
 
-		// Start game outside
-		currentRoom = outside;
+		// Game starts in the bedroom, you wake up.
+		currentRoom = bedroom;
 	}
 
 	//  Main play routine. Loops until end of play.
@@ -112,8 +126,8 @@ class Game
 	// Here we print the mission and a list of the command words.
 	private void PrintHelp()
 	{
-		Console.WriteLine("You are lost. You are alone.");
-		Console.WriteLine("You wander around at the university.");
+		Console.WriteLine("You just woke up from a wonderful dream.");
+		Console.WriteLine("You decided to stand up and wander around your house.");
 		Console.WriteLine();
 		// let the parser print the commands
 		parser.PrintValidCommands();

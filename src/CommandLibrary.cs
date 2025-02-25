@@ -14,7 +14,8 @@ class CommandLibrary
 		validCommands.Add("go");
 		validCommands.Add("quit");
 		validCommands.Add("look");
-		validCommands.Add("World Domination");
+		validCommands.Add("Up");
+		validCommands.Add("Down");
 	}
 
 	// Check whether a given string is a valid command word.
