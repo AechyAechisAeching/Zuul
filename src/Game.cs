@@ -13,6 +13,18 @@ class Game
 		CreateRooms();
 	}
 
+	class Player {
+    public Room CurrentRoom { get; set; }
+
+    public Player() {
+        CurrentRoom = null;
+    }
+
+}
+
+
+
+
 	// Initialise the Rooms (and the Items)
 	private void CreateRooms()
 	{
@@ -24,7 +36,7 @@ class Game
 		Room staircase = new Room("You are walking down the stairs.");
 		Room office = new Room("You entered your office.");
 		Room secondHallway = new Room("You are back in a hallway.");
-		Room livingroom = new Room("You entered the livingroom.");
+		Room livingroom = new Room("You entered the living room.");
 
 		// Initialise room exits
 
@@ -52,14 +64,17 @@ class Game
 		livingroom.AddExit("east", secondHallway);
 
 		// Create your Items here
-		// ...
+		Item medkit = new(25, "medkit");
+		Item bat = new(10, "bat");
+		Item knife = new(5, "knife");
+
 		// And add them to the Rooms
 		// ...
 
 		// Game starts in the bedroom, you wake up.
 		currentRoom = bedroom;
 	}
-
+		
 	//  Main play routine. Loops until end of play.
 	public void Play()
 	{
