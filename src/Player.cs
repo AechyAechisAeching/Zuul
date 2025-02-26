@@ -1,12 +1,12 @@
-// using System.Runtime.CompilerServices;
+using System.Runtime.CompilerServices;
 
-// class Player {
-//     private int health;
+class Player {
+    private int health;
 
-//     public Player() {
-//         health = 100;
-//     }
-// }
+    public Player() {
+        health = 100;
+    }
+}
 
 // class Player {
 //     . . . Damage(. . . amount {/*...*/}

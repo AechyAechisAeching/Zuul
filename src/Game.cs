@@ -22,9 +22,6 @@ class Game
 
 }
 
-
-
-
 	// Initialise the Rooms (and the Items)
 	private void CreateRooms()
 	{
@@ -74,6 +71,9 @@ class Game
 		// Game starts in the bedroom, you wake up.
 		currentRoom = bedroom;
 	}
+
+
+
 		
 	//  Main play routine. Loops until end of play.
 	public void Play()
@@ -81,7 +81,7 @@ class Game
 		PrintWelcome();
 
 		// Enter the main command loop. Here we repeatedly read commands and
-		// execute them until the player wants to quit.
+		// execute them until the player wants to quit.~
 		bool finished = false;
 		while (!finished)
 		{
