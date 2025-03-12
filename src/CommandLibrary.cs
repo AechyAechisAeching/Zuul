@@ -2,6 +2,19 @@ using System.Collections.Generic;
 
 class CommandLibrary
 {
+	
+    private Player player;
+
+    public CommandLibrary(Player player)
+    {
+        this.player = player;
+    }
+
+    public void Status()
+    {
+        Console.WriteLine($"Player Health: {player.GetHealth()}");
+    }
+
 	// A List that holds all valid command words
 	private readonly List<string> validCommands;
 
@@ -16,6 +29,7 @@ class CommandLibrary
 		validCommands.Add("look");
 		validCommands.Add("up");
 		validCommands.Add("down");
+		
 	}
 
 	// Check whether a given string is a valid command word.

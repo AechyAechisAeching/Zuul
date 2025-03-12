@@ -64,6 +64,7 @@ class Game
 		Item medkit = new(25, "medkit");
 		Item bat = new(10, "bat");
 		Item knife = new(5, "knife");
+		Item katana = new(15, "katana");
 
 		// And add them to the Rooms
 		// ...
@@ -128,6 +129,7 @@ class Game
 			case "quit":
 				wantToQuit = true;
 				break;
+
 		}
 
 		return wantToQuit;

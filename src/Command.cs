@@ -1,3 +1,4 @@
+
 class Command
 {
 	public string CommandWord { get; init; }
@@ -24,4 +25,9 @@ class Command
 	{
 		return SecondWord != null;
 	}
+
+    internal static void Status()
+    {
+        throw new NotImplementedException();
+    }
 }
