@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 class Game
 {
@@ -22,10 +23,10 @@ class Game
 	
 	private void Take(Command command)
 	{
-		// Implement
+		
 	}
 	private void Drop(Command command) {
-		// Implement
+		
 	}
 }
 
