@@ -19,7 +19,14 @@ class Game
     public Player() {
         CurrentRoom = null;
     }
-
+	
+	private void Take(Command command)
+	{
+		// Implement
+	}
+	private void Drop(Command command) {
+		// Implement
+	}
 }
 
 	// Initialise the Rooms (and the Items)
@@ -129,7 +136,7 @@ class Game
 			case "quit":
 				wantToQuit = true;
 				break;
-
+			// case "look";
 		}
 
 		return wantToQuit;
@@ -160,6 +167,7 @@ class Game
 			Console.WriteLine("Go where?");
 			return;
 		}
+
 
 		string direction = command.SecondWord;
 
