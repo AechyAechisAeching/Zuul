@@ -31,4 +31,16 @@ class Player
     {
         return health;
     }
+
+    public bool TakeFromChest(string itemName)
+    {
+        // TODO implement:
+        // // Remove the Item from the Room
+        // // Put it in your backpack.
+        // // Inspect returned values.
+        // // If the item doesn't fit your backpack, put it back in the chest.
+        // // Communicate to the user what's happening.
+        // // Return true/false for success/failure
+        return false;
+    }
 }

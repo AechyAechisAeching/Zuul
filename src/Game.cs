@@ -23,7 +23,13 @@ class Game
 	
 	private void Take(Command command)
 	{
-		
+		if (!command.HasSecondWord())
+		{
+			Console.WriteLine("take what?");
+			return;
+		} 
+
+
 	}
 	private void Drop(Command command) {
 		
