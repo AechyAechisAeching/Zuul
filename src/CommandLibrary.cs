@@ -32,6 +32,7 @@ class CommandLibrary
 		validCommands.Add("down");
 		validCommands.Add("take");
 		validCommands.Add("drop");
+		validCommands.Add("use");
 		
 	}
 
