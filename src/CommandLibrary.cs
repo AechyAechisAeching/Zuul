@@ -26,6 +26,7 @@ class CommandLibrary
 		validCommands.Add("help");
 		validCommands.Add("go");
 		validCommands.Add("quit");
+		validCommands.Add("status");
 		validCommands.Add("look");
 		validCommands.Add("up");
 		validCommands.Add("down");

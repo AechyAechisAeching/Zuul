@@ -1,13 +1,44 @@
-using System.Runtime.CompilerServices;
-
 class Player
 {
+    private Inventory backpack;
+    public Room CurrentRoom;
     private int health;
     private int maxHealth = 100;
 
+    // Constructor
     public Player()
     {
-        health = maxHealth;
+        health = 100;
+        backpack = new Inventory(30);
+    }
+
+    public bool TakeFromChest(string itemName)
+    {
+        Item pItem = CurrentRoom.Chest.Get(itemName);
+        if (pItem != null && backpack.FreeWeight() - pItem.Weight >= 0)
+        {
+            backpack.Put(itemName, pItem);
+            Console.WriteLine($"{itemName} has been added to your backpack.");
+            return true;
+        }
+        else
+        {
+            Console.WriteLine("There's no space left in your backpack.");
+            return false;
+        }
+    }
+
+    public bool DropToChest(string itemName)
+    {
+        Item pItem = backpack.Get(itemName);
+        if (pItem == null)
+        {
+            Console.WriteLine("You don't have that item in your backpack.");
+            return false;
+        }
+        CurrentRoom.Chest.Put(itemName, pItem);
+        Console.WriteLine($"{itemName} has been dropped into the chest.");
+        return true;
     }
 
     public void Damage(int amount)
@@ -32,15 +63,20 @@ class Player
         return health;
     }
 
-    public bool TakeFromChest(string itemName)
+    // New method to print the player's backpack inventory
+    public void PrintInventory()
     {
-        // TODO implement:
-        // // Remove the Item from the Room
-        // // Put it in your backpack.
-        // // Inspect returned values.
-        // // If the item doesn't fit your backpack, put it back in the chest.
-        // // Communicate to the user what's happening.
-        // // Return true/false for success/failure
-        return false;
+        if (backpack.Count == 0)
+        {
+            Console.WriteLine("Your backpack is empty.");
+        }
+        else
+        {
+            Console.WriteLine("You are carrying the following items:");
+            foreach (var item in backpack.Items)
+            {
+                Console.WriteLine($"- {item.Key} ({item.Value.Weight} KG)");
+            }
+        }
     }
 }

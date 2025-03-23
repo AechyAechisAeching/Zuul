@@ -1,11 +1,9 @@
-using System.ComponentModel;
-using System.Security.Cryptography.X509Certificates;
-
 class Inventory
 {
     // fields
     private int maxWeight;
     private Dictionary<string, Item> items;
+
     public Inventory(int maxWeight)
     {
         this.maxWeight = maxWeight;
@@ -15,15 +13,11 @@ class Inventory
     // methods
     public int TotalWeight()
     {
-        int total = 30;
-
-        // Loop though the items and add all the weights
-        Item medkit = new(25, "medkit");
-        Item bat = new(10, "bat");
-        Item knife = new(5, "knife");
-        Item katana = new(15, "katana");
-
-
+        int total = 0;
+        foreach (var item in items.Values)
+        {
+            total += item.Weight;
+        }
         return total;
     }
 
@@ -45,7 +39,8 @@ class Inventory
 
     public Item Get(string itemName)
     {
-        if(items.ContainsKey(itemName)){
+        if (items.ContainsKey(itemName))
+        {
             Item item = items[itemName];
             items.Remove(itemName);
             return item;
@@ -53,4 +48,15 @@ class Inventory
         return null;
     }
 
+    // Get all items in the inventory
+    public Dictionary<string, Item> Items
+    {
+        get { return items; }
+    }
+
+    // Get the number of items in the inventory
+    public int Count
+    {
+        get { return items.Count; }
+    }
 }
