@@ -46,7 +46,7 @@ class Game
         livingroom.AddExit("east", secondHallway);
 
         // Add items to rooms
-        Item medkit = new(25, "medkit");
+        Item medkit = new(15, "medkit");
         Item bat = new(10, "bat");
         Item knife = new(5, "knife");
         Item katana = new(15, "katana");
@@ -55,6 +55,8 @@ class Game
     // Add items to the room
     bedroom.AddItem("medkit", medkit);
     kitchen.AddItem("knife", knife);
+	office.AddItem("katana", katana);
+	bathroom.AddItem("bat", bat);
 
     // Set player's starting position
     player.CurrentRoom = bedroom;
@@ -87,8 +89,8 @@ class Game
         Console.WriteLine(player.CurrentRoom.GetLongDescription());
     }
 
-    private bool ProcessCommand(Command command)
-   {
+private bool ProcessCommand(Command command)
+{
     bool wantToQuit = false;
 
     if (player.IsAlive())
@@ -116,12 +118,18 @@ class Game
             case "look":
                 Look();
                 break;
+            case "take":
+                Take(command);  // Call Take method
+                break;
+            case "drop":
+                Drop(command);  // Call Drop method
+                break;
         }
     }
     else
     {
-        // If the healthbar is 0..
-		//  the player can no longer sent any commands and can only use the command quit.
+        // If the health is 0..
+        // the player can no longer send any commands except quit.
         if (command.CommandWord == "quit")
         {
             wantToQuit = true;
@@ -134,16 +142,16 @@ class Game
 
     return wantToQuit;
 }
+
 	public void Look()
 {
-
     // Describe the current room
     Console.WriteLine(player.CurrentRoom.GetLongDescription());
 
-    // Check if the chest is available in the current room
-    if (player.CurrentRoom.Chest != null && player.CurrentRoom.Chest.Count > 0)
+    // Now explicitly show the items in the room
+    if (player.CurrentRoom.Chest.Items.Count > 0)
     {
-        Console.WriteLine("Items in the chest:");
+        Console.WriteLine("Items in the room:");
         foreach (var item in player.CurrentRoom.Chest.Items)
         {
             Console.WriteLine($"- {item.Key} ({item.Value.Weight} KG)");
@@ -154,7 +162,6 @@ class Game
         Console.WriteLine("There are no items in the room.");
     }
 }
-
     private void PrintHelp()
     {
         Console.WriteLine("You just woke up from a wonderful dream.");
@@ -172,6 +179,7 @@ class Game
     }
 
     Console.WriteLine("Your health = " + player.GetHealth());
+	player.PrintInventory();
 }
 
 
@@ -196,7 +204,6 @@ class Game
     // Change the current room to the next room
     player.CurrentRoom = nextRoom;
 
-    
     player.Damage(5);
 
     if (player.IsAlive()) 

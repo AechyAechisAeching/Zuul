@@ -30,6 +30,8 @@ class CommandLibrary
 		validCommands.Add("look");
 		validCommands.Add("up");
 		validCommands.Add("down");
+		validCommands.Add("take");
+		validCommands.Add("drop");
 		
 	}
 
