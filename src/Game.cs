@@ -23,6 +23,7 @@ class Game
         Room office = new Room("You entered your office.");
         Room secondHallway = new Room("You are back in a hallway.");
         Room livingroom = new Room("You entered the living room.");
+        Room door = new Room("You found a exit??..");
 
         // Set up room exits
         bedroom.AddExit("north", hallway);
@@ -36,9 +37,12 @@ class Game
         secondHallway.AddExit("east", kitchen);
         kitchen.AddExit("west", secondHallway);
         secondHallway.AddExit("north", office);
+        office.AddExit("north", door);
         office.AddExit("south", secondHallway);
         secondHallway.AddExit("west", livingroom);
         livingroom.AddExit("east", secondHallway);
+
+    
 
         // Add items to rooms
         Item medkit = new Item(15, "medkit");
@@ -72,8 +76,11 @@ class Game
         Console.ReadLine();
     }
 
+
+        // Give explanation to the game
     private void PrintWelcome()
     {
+        //Intro
         Console.WriteLine();
         Console.WriteLine("Welcome to Zuul!");
         Console.WriteLine("Zuul is a new, incredibly boring adventure game.");
@@ -158,11 +165,14 @@ class Game
         }
     }
 
+    // Give a starting dialogue and help commands
     private void PrintHelp()
     {
         Console.WriteLine("You just woke up from a wonderful dream.");
         Console.WriteLine("You decided to stand up and wander around your house.");
+        Console.WriteLine("Your goal is to escape the mansion, avoid having any contact with anyone!");
         Console.WriteLine();
+        // Prints all valid commands from COmmandlibrary
         parser.PrintValidCommands();
     }
 
@@ -199,7 +209,7 @@ class Game
         // Change the current room to the next room
         player.CurrentRoom = nextRoom;
 
-        player.Damage(5);
+        player.Damage(10);
 
         if (player.IsAlive()) 
         {
@@ -211,14 +221,18 @@ class Game
         }
     }
 
+
+
+        // Has the player taken the item?
     private void Take(Command command)
     {
         if (!command.HasSecondWord())
         {
+            // The Item is not defined and you have to clarify what   item
             Console.WriteLine("Take what?");
             return;
         }
-
+        // Player gave clarified information what Item it is
         string itemName = command.SecondWord;
         player.TakeFromChest(itemName);
     }
