@@ -23,8 +23,7 @@ class Game
         Room office = new Room("You entered your office.");
         Room secondHallway = new Room("You are back in a hallway.");
         Room livingroom = new Room("You entered the living room.");
-        Room door = new Room("You found a exit??..");
-
+        Room exit = new Room("exit");
         // Set up room exits
         bedroom.AddExit("north", hallway);
         hallway.AddExit("south", bedroom);
@@ -37,12 +36,12 @@ class Game
         secondHallway.AddExit("east", kitchen);
         kitchen.AddExit("west", secondHallway);
         secondHallway.AddExit("north", office);
-        office.AddExit("north", door);
+        office.AddExit("north", exit);
         office.AddExit("south", secondHallway);
         secondHallway.AddExit("west", livingroom);
         livingroom.AddExit("east", secondHallway);
 
-    
+
 
         // Add items to rooms
         Item medkit = new Item(15, "medkit");
@@ -58,6 +57,7 @@ class Game
 
         // Set player's starting position
         player.CurrentRoom = bedroom;
+        
     }
 
     public void Play()
@@ -127,6 +127,7 @@ class Game
                 case "use":
                     Use(command);
                     break;
+                    
             }
         }
         else
@@ -182,6 +183,7 @@ class Game
         {
             Console.WriteLine("You are dead.");
             return;  // If the player has died, no commands can be used.
+            
         }
 
         Console.WriteLine("Your health = " + player.GetHealth());
@@ -189,38 +191,43 @@ class Game
     }
 
     private void GoRoom(Command command)
+{
+    if (!command.HasSecondWord())
     {
-        if (!command.HasSecondWord())
-        {
-            Console.WriteLine("Go where?");
-            return;
-        }
-
-        string direction = command.SecondWord;
-
-        // Try to go to the next room.
-        Room nextRoom = player.CurrentRoom.GetExit(direction);
-        if (nextRoom == null)
-        {
-            Console.WriteLine("There is no door to " + direction + "!");
-            return;
-        }
-
-        // Change the current room to the next room
-        player.CurrentRoom = nextRoom;
-
-        player.Damage(10);
-
-        if (player.IsAlive()) 
-        {
-            Console.WriteLine(player.CurrentRoom.GetLongDescription());
-        }
-        else
-        {
-            Console.WriteLine("You are dead.");
-        }
+        Console.WriteLine("Go where?");
+        return;
     }
 
+    string direction = command.SecondWord;
+
+    // Try to go to the next room.
+    Room nextRoom = player.CurrentRoom.GetExit(direction);
+    if (nextRoom == null)
+    {
+        Console.WriteLine("There is no door to " + direction + "!");
+        return;
+    }
+
+    player.CurrentRoom = nextRoom;
+if (player.CurrentRoom.GetLongDescription().Contains("exit"))
+{
+    Console.WriteLine("Congratulations! You found the exit and escaped the mansion!");
+    
+    Environment.Exit(0);
+}
+
+
+    player.Damage(10);
+
+    if (player.IsAlive()) 
+    {
+        Console.WriteLine(player.CurrentRoom.GetLongDescription());
+    }
+    else
+    {
+        Console.WriteLine("You are dead.");
+    }
+}
 
 
         // Has the player taken the item?
